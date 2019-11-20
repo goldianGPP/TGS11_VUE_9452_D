@@ -28,7 +28,7 @@
 
 			<template v-slot:append>
 				<div class="pa-2">
-					<v-btn block>Logout</v-btn>
+					<v-btn @click="logOut()" block>Logout</v-btn>
 				</div>
 			</template>
 		</v-navigation-drawer>
@@ -61,5 +61,11 @@
 				],
 			}
 		},
+		methods:{
+			logOut(){
+				localStorage.removeItem('token')
+				this.$router.push({name : "LoginLayout"})
+			}
+		}
 	}
 </script>

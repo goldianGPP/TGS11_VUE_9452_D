@@ -156,11 +156,16 @@ export default {
     },
     methods:{
         getData(){
+            var config = {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            }
             var uri = this.$apiUrl + '/user'
-            this.$http.get(uri).then(response =>{
+            this.$http.get(uri,config).then(response =>{
                 this.users=response.data.message
-        })
-    },
+            })
+        },
 
         sendData(){
             this.user.append('name', this.form.name);
@@ -182,8 +187,8 @@ export default {
                 this.text = 'Try Again';
                 this.color = 'red';
                 this.load = false;
-        })
-    },
+            })
+        },
 
         updateData(){
             this.user.append('name', this.form.name);
@@ -206,8 +211,8 @@ export default {
             this.color = 'red';
             this.load = false;
             this.typeInput = 'new';
-        })
-    },
+            })
+        },
 
         editHandler(item){
             this.typeInput = 'edit';
@@ -216,7 +221,7 @@ export default {
             this.form.email = item.email;
             this.form.password = '',
             this.updatedId = item.id
-    },
+     },
 
         deleteData(deleteId){
             var uri=this.$apiUrl + '/user/' + deleteId;
@@ -232,7 +237,7 @@ export default {
                     this.text='Try Again';
                     this.color='red';
                 })
-    },
+      },
     
         setForm(){
             if (this.typeInput === 'new') {
@@ -240,7 +245,7 @@ export default {
             } else { console.log("dddd")
                 this.updateData()
             }
-    },
+     },
 
         resetForm(){
             this.form = {
